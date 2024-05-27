@@ -1,0 +1,44 @@
+package com.mycompany.pruebatienda;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
+/**
+ *
+ * @author Mati
+ */
+public class PruebaTienda {
+ public static void main(String[] args) {
+ File fichero = null;
+ FileReader reader = null;
+ BufferedReader buffer = null;
+ try {
+ fichero = new File("productos.csv");
+ reader = new FileReader(fichero);
+ buffer = new BufferedReader(reader);
+ String linea = buffer.readLine();
+ while (linea != null) {
+ linea = buffer.readLine();
+ String[] array = linea.split(";");
+ if (array[1].equals("A")) {
+ String lineaCliente = String.join(";", array);
+ System.out.println("El cliente es :" + lineaCliente);
+ }
+ }
+ } catch (Exception e) {
+ System.out.println("ERROR");
+ } finally {
+ try {
+ if (buffer != null) {
+ buffer.close();
+ }
+ if (reader != null) {
+ reader.close();
+ }
+ } catch (Exception e) {
+ e.printStackTrace();
+ }
+ }
+ }
+}
